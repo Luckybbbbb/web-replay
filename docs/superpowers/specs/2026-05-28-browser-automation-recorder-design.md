@@ -488,8 +488,7 @@ chrome-debug-agent/
 
 ## 依赖
 
-- `playwright` — 浏览器自动化引擎
-- `playwright-core` — Playwright 核心库
+- `playwright` — 浏览器自动化引擎（包含浏览器二进制安装）
 - `commander` — CLI 框架
 - `zod` — 参数验证
 - `chalk` — 终端彩色输出

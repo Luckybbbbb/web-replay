@@ -10,7 +10,7 @@ allowed-tools:
 
 # Replay Recorded Session
 
-You are triggering the chrome-debug-agent playback tool. This replays a previously recorded browser script and generates a detailed report with step results, network data, and screenshots.
+You are triggering the web-replay playback tool. This replays a previously recorded browser script and generates a detailed report with step results, network data, and screenshots.
 
 ## Steps
 

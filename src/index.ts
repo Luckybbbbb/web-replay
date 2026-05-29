@@ -8,7 +8,7 @@ import { registerListCommand } from './cli/list.js';
 const program = new Command();
 
 program
-  .name('chrome-debug-agent')
+  .name('web-replay')
   .description('Browser automation recording and playback tool')
   .version('0.1.0');
 

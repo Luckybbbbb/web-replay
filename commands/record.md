@@ -10,7 +10,7 @@ allowed-tools:
 
 # Record Browser Session
 
-You are triggering the chrome-debug-agent recording tool. This opens a browser window for the user to interact with, capturing all clicks, inputs, and navigation into a reproducible JSON script.
+You are triggering the web-replay recording tool. This opens a browser window for the user to interact with, capturing all clicks, inputs, and navigation into a reproducible JSON script.
 
 ## Steps
 

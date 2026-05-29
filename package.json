@@ -1,5 +1,5 @@
 {
-  "name": "chrome-debug-agent",
+  "name": "web-replay",
   "version": "0.1.0",
   "description": "Browser automation recording, playback and data collection plugin for Claude Code",
   "main": "dist/index.js",
@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "bin": {
-    "chrome-debug-agent": "./dist/index.js"
+    "web-replay": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",

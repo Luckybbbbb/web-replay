@@ -1,0 +1,8 @@
+{
+  "marketplace": {
+    "displayName": "Web Replay",
+    "description": "Browser automation recording, playback and data collection. Record user interactions, replay scripts, capture network/analytics data for bug reproduction and regression testing.",
+    "category": "testing",
+    "tags": ["browser", "automation", "playwright", "recording", "testing", "analytics", "debugging"]
+  }
+}

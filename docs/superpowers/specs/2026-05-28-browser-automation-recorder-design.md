@@ -2,7 +2,7 @@
 
 ## 概述
 
-chrome-debug-agent 是一个 Claude Code 插件，提供浏览器操作的录制、回放和全链路数据采集能力。基于 Playwright 作为底层引擎，以 Claude Code 插件形式存在，包含 CLI 工具、Skill 使用方法和 Hook 关键节点注入。
+web-replay 是一个 Claude Code 插件，提供浏览器操作的录制、回放和全链路数据采集能力。基于 Playwright 作为底层引擎，以 Claude Code 插件形式存在，包含 CLI 工具、Skill 使用方法和 Hook 关键节点注入。
 
 ### 核心目标
 
@@ -326,62 +326,62 @@ page.on('console', (msg) => {
 
 ```bash
 # 交互式录制（打开浏览器让用户操作）
-chrome-debug-agent record --url <url> --name <name>
+web-replay record --url <url> --name <name>
 
 # 带埋点采集的录制
-chrome-debug-agent record --url <url> --name <name> --collect-analytics --analytics-domains "ga.example.com,fb.example.com"
+web-replay record --url <url> --name <name> --collect-analytics --analytics-domains "ga.example.com,fb.example.com"
 
 # 带网络录制的录制
-chrome-debug-agent record --url <url> --name <name> --har --trace
+web-replay record --url <url> --name <name> --har --trace
 ```
 
 ### play — 回放
 
 ```bash
 # 回放脚本（默认 headless）
-chrome-debug-agent play <name>
+web-replay play <name>
 
 # 有头模式（显示浏览器窗口）
-chrome-debug-agent play <name> --headed
+web-replay play <name> --headed
 
 # 同时录制 trace 和 HAR
-chrome-debug-agent play <name> --trace --har
+web-replay play <name> --trace --har
 
 # 指定环境变量
-chrome-debug-agent play <name> --env BASE_URL=https://staging.example.com
+web-replay play <name> --env BASE_URL=https://staging.example.com
 ```
 
 ### list — 列出
 
 ```bash
 # 列出所有录制脚本
-chrome-debug-agent list
+web-replay list
 
 # 以 JSON 格式输出
-chrome-debug-agent list --json
+web-replay list --json
 ```
 
 ### export — 导出
 
 ```bash
 # 导出为 Playwright 测试脚本
-chrome-debug-agent export <name> --format playwright
+web-replay export <name> --format playwright
 
 # 导出为 JSON
-chrome-debug-agent export <name> --format json
+web-replay export <name> --format json
 
 # 导出为 Puppeteer 脚本
-chrome-debug-agent export <name> --format puppeteer
+web-replay export <name> --format puppeteer
 ```
 
 ### collect — 单独采集
 
 ```bash
 # 在指定页面采集网络/埋点数据
-chrome-debug-agent collect --url <url> --analytics-domains "ga.example.com"
+web-replay collect --url <url> --analytics-domains "ga.example.com"
 
 # 采集指定时长
-chrome-debug-agent collect --url <url> --duration 30
+web-replay collect --url <url> --duration 30
 ```
 
 ---
@@ -420,26 +420,26 @@ chrome-debug-agent collect --url <url> --duration 30
 
 ### 双引擎模式
 
-chrome-devtools-mcp 和 chrome-debug-agent 是互补关系：
+chrome-devtools-mcp 和 web-replay 是互补关系：
 
 | 场景 | 工具 | 用途 |
 |------|------|------|
 | 探索/调试 | chrome-devtools-mcp | 实时交互、查看 DOM、检查 console |
-| 录制复现步骤 | chrome-debug-agent | 录制用户操作、生成脚本 |
-| 自动化回放 | chrome-debug-agent | 一键回放、采集数据、生成报告 |
-| 埋点验证 | chrome-debug-agent | 采集分析请求、验证埋点是否正确 |
+| 录制复现步骤 | web-replay | 录制用户操作、生成脚本 |
+| 自动化回放 | web-replay | 一键回放、采集数据、生成报告 |
+| 埋点验证 | web-replay | 采集分析请求、验证埋点是否正确 |
 
 ### 共享 Chrome 实例
 
 两个工具可连接同一个 Chrome 实例，避免浏览器冲突：
 
 - chrome-devtools-mcp 通过 `browserURL` 连接（如 `http://127.0.0.1:9222`）
-- chrome-debug-agent 的 Playwright 通过 `connectOverCDP` 连接同一实例
+- web-replay 的 Playwright 通过 `connectOverCDP` 连接同一实例
 
 ### 典型工作流
 
 1. **发现 bug** — 用 chrome-devtools-mcp 调试页面，发现问题
-2. **录制复现步骤** — 切换到 chrome-debug-agent 录制模式，复现问题
+2. **录制复现步骤** — 切换到 web-replay 录制模式，复现问题
 3. **验证可复现** — 回放录制脚本，确认 bug 可稳定复现
 4. **修复后回归** — 代码修复后回放同一脚本，验证 bug 已修复
 
@@ -448,7 +448,7 @@ chrome-devtools-mcp 和 chrome-debug-agent 是互补关系：
 ## 文件结构
 
 ```
-chrome-debug-agent/
+web-replay/
 ├── package.json
 ├── tsconfig.json
 ├── .claude-plugin/

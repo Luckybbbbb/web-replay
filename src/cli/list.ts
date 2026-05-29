@@ -5,7 +5,7 @@ import type { Command } from 'commander';
  * Register the `list` subcommand on the Commander program.
  *
  * Usage:
- *   chrome-debug-agent list [options]
+ *   web-replay list [options]
  */
 export function registerListCommand(program: Command): void {
   program

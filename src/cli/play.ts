@@ -5,7 +5,7 @@ import type { Command } from 'commander';
  * Register the `play` subcommand on the Commander program.
  *
  * Usage:
- *   chrome-debug-agent play <name> [options]
+ *   web-replay play <name> [options]
  */
 export function registerPlayCommand(program: Command): void {
   program

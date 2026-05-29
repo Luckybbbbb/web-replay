@@ -1,5 +1,5 @@
 {
-  "name": "chrome-debug-agent",
+  "name": "web-replay",
   "version": "0.1.0",
   "description": "Browser automation recording, playback and data collection plugin for Claude Code. Record browser interactions, replay scripts, capture network/analytics data.",
   "keywords": ["browser", "automation", "recording", "playback", "testing", "playwright", "analytics"]

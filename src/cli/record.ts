@@ -5,7 +5,7 @@ import type { Command } from 'commander';
  * Register the `record` subcommand on the Commander program.
  *
  * Usage:
- *   chrome-debug-agent record --url <url> --name <name> [options]
+ *   web-replay record --url <url> --name <name> [options]
  */
 export function registerRecordCommand(program: Command): void {
   program

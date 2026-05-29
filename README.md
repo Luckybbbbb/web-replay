@@ -18,8 +18,6 @@ Record user interactions in a browser, replay them automatically, and capture ne
 - Node.js 18+
 - Claude Code CLI
 
-Playwright browsers are installed automatically during `npm install` (postinstall).
-
 ## Installation
 
 ### As a Claude Code Plugin
@@ -37,6 +35,23 @@ Add to your Claude Code settings (`~/.claude/settings.json`):
 }
 ```
 
+Or install via CLI:
+
+```
+/plugin marketplace add Luckybbbbb/web-replay
+/plugin install web-replay@web-replay
+```
+
+### First-Time Setup
+
+After installing, run the setup command to install dependencies (Playwright Chromium):
+
+```
+/setup
+```
+
+This only needs to be done once after installation.
+
 ### Local Development
 
 ```bash
@@ -48,7 +63,27 @@ npx playwright install chromium
 
 ## Usage
 
-### CLI Commands
+### Claude Code Slash Commands
+
+Once installed as a plugin:
+
+| Command | Description |
+|---------|-------------|
+| `/setup` | Install dependencies (first-time setup) |
+| `/record` | Start an interactive browser recording session |
+| `/play` | Replay a recorded browser script |
+| `/list` | List all saved recordings |
+| `/replay-bug` | Replay a bug recording and verify if it's fixed |
+
+### Claude Code Skills
+
+The plugin provides auto-activating skills:
+
+- **record** — Activates when you mention "record", "录制", "capture browser", "记录操作"
+- **play** — Activates when you mention "replay", "回放", "重放", "run test", "verify fix"
+- **collect** — Activates when you mention "collect network", "采集网络", "捕获埋点", "monitor requests"
+
+### CLI Commands (for local development)
 
 ```bash
 # Record a browser session (opens browser for interaction)
@@ -67,25 +102,6 @@ npx tsx src/index.ts play my-test
 npx tsx src/index.ts play my-test --headed
 ```
 
-### Claude Code Slash Commands
-
-Once installed as a plugin:
-
-| Command | Description |
-|---------|-------------|
-| `/record` | Start an interactive browser recording session |
-| `/play` | Replay a recorded browser script |
-| `/list` | List all saved recordings |
-| `/replay-bug` | Replay a bug recording and verify if it's fixed |
-
-### Claude Code Skills
-
-The plugin provides auto-activating skills:
-
-- **record** — Activates when you mention "record", "录制", "capture browser", "记录操作"
-- **play** — Activates when you mention "replay", "回放", "重放", "run test", "verify fix"
-- **collect** — Activates when you mention "collect network", "采集网络", "捕获埋点", "monitor requests"
-
 ## Typical Workflow
 
 1. **Discover a bug** — Use chrome-devtools-mcp to explore and find the issue
@@ -100,14 +116,18 @@ The plugin provides auto-activating skills:
 web-replay/
 ├── .claude-plugin/plugin.json    # Plugin manifest
 ├── commands/                     # Claude Code slash commands
-│   ├── record.md
-│   ├── play.md
-│   ├── list.md
-│   └── replay-bug.md
+│   ├── setup.md                  # First-time setup
+│   ├── record.md                 # Record browser session
+│   ├── play.md                   # Replay recording
+│   ├── list.md                   # List recordings
+│   └── replay-bug.md             # Bug verification workflow
 ├── skills/                       # Auto-activating skills
 │   ├── record/SKILL.md
 │   ├── play/SKILL.md
 │   └── collect/SKILL.md
+├── hooks/                        # Event hooks
+│   ├── hooks.json                # Hook configuration
+│   └── scripts/check-deps.sh     # Dependency check on session start
 ├── src/                          # TypeScript source
 │   ├── index.ts                  # CLI entry point
 │   ├── cli/                      # Command handlers
@@ -175,9 +195,10 @@ Reports are saved to `reports/<timestamp>/report.json` with step screenshots:
 Recordings use a priority-based selector strategy for stability:
 
 1. `data-testid` attribute (most stable)
-2. `name` attribute (form elements)
-3. `id` attribute
-4. CSS path (fallback)
+2. `aria-label` attribute
+3. `name` attribute (form elements)
+4. `id` attribute
+5. CSS path (fallback)
 
 ## Integration with chrome-devtools-mcp
 
